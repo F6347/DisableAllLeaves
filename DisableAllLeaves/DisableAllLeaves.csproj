@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
 	  <TargetFramework>netstandard2.1</TargetFramework>
@@ -278,8 +278,8 @@
     <Reference Include="UnityEngine.XRModule">
       <HintPath>$(GameAssemblyPath)\UnityEngine.XRModule.dll</HintPath>
     </Reference>
-    <Reference Include="Utilla">
-      <HintPath>$(PluginsPath)\Utilla\Utilla.dll</HintPath>
+    <Reference Include="Newtilla">
+      <HintPath>$(PluginsPath)\Newtilla.dll</HintPath>
     </Reference>
     <Reference Include="websocket-sharp">
       <HintPath>$(GameAssemblyPath)\websocket-sharp.dll</HintPath>

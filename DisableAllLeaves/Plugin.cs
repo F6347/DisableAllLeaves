@@ -4,8 +4,11 @@ using UnityEngine;
 
 namespace DisableAllLeaves
 {
-    [BepInDependency("Lofiat.Newtilla", "1.0.1")]
+    [BepInDependency("Lofiat.Newtilla", "1.1.0")]
     [BepInPlugin(PluginInfo.GUID, PluginInfo.Name, PluginInfo.Version)]
+    [BepInIncompatibility("org.iidk.gorillatag.iimenu")]//screw you iidk
+    [BepInIncompatibility("com.goldentrophy.gorillatag.nametags")]//no1 loves you
+    [BepInIncompatibility("com.dedouwe26.gorillatag.cosmetx")]//follow some laws 👍
     public class Plugin : BaseUnityPlugin
     {
         public int fallSiblings;

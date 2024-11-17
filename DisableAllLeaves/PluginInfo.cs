@@ -7,6 +7,6 @@ namespace DisableAllLeaves
     {
         public const string GUID = "com.f6347.gorillatag.disableallleaves";
         public const string Name = "DisableAllLeaves";
-        public const string Version = "1.0.1";
+        public const string Version = "1.0.2";
     }
 }

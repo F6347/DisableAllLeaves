@@ -9,6 +9,7 @@ namespace DisableAllLeaves
     [BepInPlugin(PluginInfo.GUID, PluginInfo.Name, PluginInfo.Version)]
     public class Plugin : BaseUnityPlugin
     {
+        bool inRoom;
         int fallSiblings = 0;
 
         void Update()
@@ -35,6 +36,8 @@ namespace DisableAllLeaves
 
         void OnModdedJoined()
         {
+            if (inRoom) return;
+            inRoom = true;
             fallSiblings = GameObject.Find("Environment Objects/LocalObjects_Prefab/Forest/fallleaves (combined by EdMeshCombinerSceneProcessor)").transform.GetSiblingIndex();
             GameObject.Find("Environment Objects/LocalObjects_Prefab/Forest").transform.GetChild(fallSiblings).gameObject.SetActive(false);
             GameObject.Find("Environment Objects/LocalObjects_Prefab/Forest").transform.GetChild(fallSiblings+1).gameObject.SetActive(false);
@@ -42,7 +45,8 @@ namespace DisableAllLeaves
         }
         void OnModdedLeft()
         {
-
+            if (!inRoom) return;
+            inRoom = false;
             GameObject.Find("Environment Objects/LocalObjects_Prefab/Forest").transform.GetChild(fallSiblings).gameObject.SetActive(true);
             GameObject.Find("Environment Objects/LocalObjects_Prefab/Forest").transform.GetChild(fallSiblings+1).gameObject.SetActive(true);
             GameObject.Find("Environment Objects/LocalObjects_Prefab/Forest").transform.GetChild(fallSiblings+2).gameObject.SetActive(true);

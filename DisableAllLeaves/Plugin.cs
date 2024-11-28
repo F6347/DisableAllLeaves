@@ -12,10 +12,17 @@ namespace DisableAllLeaves
         bool inRoom;
         int fallSiblings = 0;
 
+        private GameObject Forest;
+
         void Update()
         {
             if (!PhotonNetwork.InRoom) OnModdedJoined();
             else if (!NetworkSystem.Instance.GameModeString.Contains("MODDED")) OnModdedLeft();
+        }
+
+        public void Start()
+        {
+            Forest = GameObject.Find("Environment Objects/LocalObjects_Prefab/Forest");
         }
 
         void OnEnable()
@@ -25,33 +32,34 @@ namespace DisableAllLeaves
 
         void OnDisable()
         {
-            GameObject.Find("Environment Objects/LocalObjects_Prefab/Forest").transform.GetChild(fallSiblings).gameObject.SetActive(true);
-            GameObject.Find("Environment Objects/LocalObjects_Prefab/Forest").transform.GetChild(fallSiblings+1).gameObject.SetActive(true);
-            GameObject.Find("Environment Objects/LocalObjects_Prefab/Forest").transform.GetChild(fallSiblings+2).gameObject.SetActive(true);
-
+            Enl()
             HarmonyPatches.RemoveHarmonyPatches();
         }
-
-
+        private void Enl()
+        {
+            Forest.transform.GetChild(fallSiblings).gameObject.SetActive(true);
+            Forest.transform.GetChild(fallSiblings+1).gameObject.SetActive(true);
+            Forest.transform.GetChild(fallSiblings+2).gameObject.SetActive(true);
+        }
+        private void Disl()
+        {
+            Forest.transform.GetChild(fallSiblings).gameObject.SetActive(true);
+            Forest.transform.GetChild(fallSiblings+1).gameObject.SetActive(true);
+            Forest.transform.GetChild(fallSiblings+2).gameObject.SetActive(true);
+        }
 
         void OnModdedJoined()
         {
             if (inRoom) return;
             inRoom = true;
             fallSiblings = GameObject.Find("Environment Objects/LocalObjects_Prefab/Forest/fallleaves (combined by EdMeshCombinerSceneProcessor)").transform.GetSiblingIndex();
-            GameObject.Find("Environment Objects/LocalObjects_Prefab/Forest").transform.GetChild(fallSiblings).gameObject.SetActive(false);
-            GameObject.Find("Environment Objects/LocalObjects_Prefab/Forest").transform.GetChild(fallSiblings+1).gameObject.SetActive(false);
-            GameObject.Find("Environment Objects/LocalObjects_Prefab/Forest").transform.GetChild(fallSiblings+2).gameObject.SetActive(false);
+            Disl()
         }
         void OnModdedLeft()
         {
             if (!inRoom) return;
             inRoom = false;
-            GameObject.Find("Environment Objects/LocalObjects_Prefab/Forest").transform.GetChild(fallSiblings).gameObject.SetActive(true);
-            GameObject.Find("Environment Objects/LocalObjects_Prefab/Forest").transform.GetChild(fallSiblings+1).gameObject.SetActive(true);
-            GameObject.Find("Environment Objects/LocalObjects_Prefab/Forest").transform.GetChild(fallSiblings+2).gameObject.SetActive(true);
-
-            
+            Enl()
         }
     }
 }
